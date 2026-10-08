@@ -28,7 +28,7 @@ function getProductById(id) {
 function healthPayload() {
   return [
     {
-      message: "WebApp API en contenedor",
+      message: "WebApp API CI/CD Demo",
       status: "ok",
       socket: "TCP puerto 6061 — {insert:<element>} / {get:<element>}",
       endpoints: [
