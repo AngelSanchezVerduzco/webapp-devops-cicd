@@ -1,0 +1,41 @@
+{
+  "name": "webapp-devops",
+  "version": "1.0.0",
+  "description": "API REST con CI/CD - Docker, GitHub Actions y AWS EC2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest --runInBand --forceExit --coverage"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "app.js",
+      "db.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    }
+  }
+}

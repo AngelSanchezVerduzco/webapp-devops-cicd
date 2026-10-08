@@ -1,0 +1,15 @@
+node_modules/
+data/
+coverage/
+.env
+.env.*
+*.log
+npm-debug.log
+.DS_Store
+capturas/
+capturas_socket/
+capturas_tests/
+*.pdf
+__pycache__/
+generar_pdf_*.py
+PASOS.md
