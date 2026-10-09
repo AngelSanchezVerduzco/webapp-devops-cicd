@@ -6,7 +6,7 @@ const { db, DB_PATH, BACKUP_DIR } = require("./db");
 const app = express();
 app.use(express.json());
 
-function ok(res, data = [], statusCode = 200) {
+function ok(res, data = [], statusCode = 202) {
   return res.status(statusCode).json({ statusCode, data });
 }
 
@@ -28,8 +28,8 @@ function getProductById(id) {
 function healthPayload() {
   return [
     {
-      message: "WebApp API CI/CD Demo",
-      status: "ok",
+      message: "WebApp API CI/CD Demo test @",
+      status: "ok-up",
       socket: "TCP puerto 6061 — {insert:<element>} / {get:<element>}",
       endpoints: [
         "GET /",
