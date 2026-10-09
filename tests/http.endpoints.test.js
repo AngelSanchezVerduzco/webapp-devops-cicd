@@ -34,19 +34,19 @@ async function firstProductId() {
 
 describe("API HTTP – pruebas de endpoints", () => {
   describe("GET /", () => {
-    test("responde 200 con status ok", async () => {
+    test("responde 202 con status ok", async () => {
       const res = await request(app).get("/");
-      expect(res.status).toBe(200);
-      expect(res.body.statusCode).toBe(200);
+      expect(res.status).toBe(202);
+      expect(res.body.statusCode).toBe(202);
       expect(res.body.data[0].endpoints.length).toBeGreaterThanOrEqual(10);
     });
   });
 
   describe("GET /api/health", () => {
-    test("responde 200 con status ok", async () => {
+    test("responde 202 con status ok", async () => {
       const res = await request(app).get("/api/health");
-      expect(res.status).toBe(200);
-      expect(res.body.statusCode).toBe(200);
+      expect(res.status).toBe(202);
+      expect(res.body.statusCode).toBe(202);
       expect(res.body.data[0].status).toBe("ok");
     });
   });
@@ -54,14 +54,14 @@ describe("API HTTP – pruebas de endpoints", () => {
   describe("GET /categories", () => {
     test("lista categorias existentes", async () => {
       const res = await request(app).get("/categories");
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data.length).toBeGreaterThanOrEqual(2);
     });
 
     test("lista vacia despues de reset", async () => {
       await request(app).delete("/db/reset");
       const res = await request(app).get("/categories");
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data.length).toBe(0);
     });
   });
@@ -96,7 +96,7 @@ describe("API HTTP – pruebas de endpoints", () => {
       const res = await request(app)
         .put(`/categories/${id}`)
         .send({ name: "Bebidas Premium" });
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].name).toBe("Bebidas Premium");
     });
 
@@ -121,7 +121,7 @@ describe("API HTTP – pruebas de endpoints", () => {
         .send({ name: "Temporal" });
       const id = created.body.data[0].id;
       const res = await request(app).delete(`/categories/${id}`);
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].deleted).toBe(true);
     });
 
@@ -134,7 +134,7 @@ describe("API HTTP – pruebas de endpoints", () => {
   describe("GET /products", () => {
     test("lista productos existentes", async () => {
       const res = await request(app).get("/products");
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data.length).toBeGreaterThanOrEqual(3);
     });
   });
@@ -143,7 +143,7 @@ describe("API HTTP – pruebas de endpoints", () => {
     test("obtiene un producto existente", async () => {
       const id = await firstProductId();
       const res = await request(app).get(`/products/${id}`);
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].id).toBe(id);
     });
 
@@ -197,7 +197,7 @@ describe("API HTTP – pruebas de endpoints", () => {
       const res = await request(app)
         .put(`/products/${id}`)
         .send({ name: "Agua Mineral", price: 15, category_id: categoryId });
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].name).toBe("Agua Mineral");
     });
 
@@ -220,7 +220,7 @@ describe("API HTTP – pruebas de endpoints", () => {
     test("elimina un producto existente", async () => {
       const id = await firstProductId();
       const res = await request(app).delete(`/products/${id}`);
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].deleted).toBe(true);
     });
 
@@ -233,7 +233,7 @@ describe("API HTTP – pruebas de endpoints", () => {
   describe("POST /db/backup", () => {
     test("crea un backup de la base de datos", async () => {
       const res = await request(app).post("/db/backup");
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       expect(res.body.data[0].file).toMatch(/\.db$/);
     });
   });
@@ -241,7 +241,7 @@ describe("API HTTP – pruebas de endpoints", () => {
   describe("DELETE /db/reset", () => {
     test("vacia la base de datos", async () => {
       const res = await request(app).delete("/db/reset");
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(202);
       const prods = await request(app).get("/products");
       expect(prods.body.data.length).toBe(0);
     });
