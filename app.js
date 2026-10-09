@@ -29,7 +29,7 @@ function healthPayload() {
   return [
     {
       message: "WebApp API CI/CD Demo test @",
-      status: "ok-up",
+      status: "ok",
       socket: "TCP puerto 6061 — {insert:<element>} / {get:<element>}",
       endpoints: [
         "GET /",
